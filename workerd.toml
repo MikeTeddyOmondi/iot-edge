@@ -1,0 +1,17 @@
+[[services]]
+name = "iot-api"
+[services.worker]
+modules = [
+  { name = "main.js", type = "esModule", path = "src/main.js" }
+]
+compatibility_date = "2023-10-01"
+
+[[sockets]]
+name = "http"
+address = "*:8080"
+service = "iot-api"
+
+[services.worker.bindings]
+# Add KV namespace for device storage
+# MY_KV = { type = "kv", namespace_id = "your-namespace" }
+

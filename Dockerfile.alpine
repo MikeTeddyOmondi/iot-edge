@@ -1,0 +1,16 @@
+# Use Alpine instead of scratch
+FROM alpine:latest
+
+# Install glibc compatibility and CA certificates
+RUN apk --no-cache add ca-certificates libc6-compat libgcc libstdc++
+
+WORKDIR /app
+
+COPY workerd ./workerd
+RUN chmod +x ./workerd
+
+COPY worker.js ./worker.js
+COPY workerd.toml ./workerd.toml
+
+EXPOSE 8080
+ENTRYPOINT ["./workerd", "serve", "./workerd.toml"]

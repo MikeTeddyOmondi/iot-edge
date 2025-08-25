@@ -1,0 +1,4 @@
+/target
+workerd
+**/*.crt
+iot-edge-workerd

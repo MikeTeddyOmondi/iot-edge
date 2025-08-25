@@ -1,0 +1,16 @@
+# Dockerfile.scratch
+FROM scratch
+WORKDIR /app
+
+# Copy the statically linked workerd binary
+COPY workerd ./workerd
+
+# Copy function and config
+COPY worker.js ./worker.js
+COPY workerd.toml ./workerd.toml
+
+# Copy minimal SSL certificates for HTTPS requests
+COPY ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+
+EXPOSE 8080
+ENTRYPOINT ["./workerd", "serve", "./workerd.toml"]
