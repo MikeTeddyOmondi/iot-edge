@@ -17,3 +17,13 @@ Accept: application/json
 
 ### Get device data
 GET http://localhost:8080/device/d01
+Content-Type: application/json
+Accept: application/json
+
+### Heartbeat device check
+@deviceId = d01
+GET http://localhost:8080/heartbeat/{{deviceId}}
+Content-Type: application/json
+Accept: application/json
+
+###
