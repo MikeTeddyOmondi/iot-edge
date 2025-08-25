@@ -2,3 +2,4 @@
 workerd
 **/*.crt
 iot-edge-workerd
+node_modules/

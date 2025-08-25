@@ -1,0 +1,41 @@
+{
+  "name": "iot-edge-workerd",
+  "version": "1.0.0",
+  "description": "IoT Edge Service using Hono and workerd",
+  "main": "app.js",
+  "scripts": {
+    "dev": "workerd serve app.capnp",
+    "compile": "workerd compile app.capnp > iot-edge-service",
+    "build": "esbuild app.js --bundle --format=esm --target=es2022 --outfile=dist/worker.js",
+    "start": "workerd serve app.capnp"
+  },
+  "dependencies": {
+    "hono": "^4.9.4"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.9",
+    "@cloudflare/workers-types": "^4.20231218.0"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikeTeddyOmondi/iot-edge.git"
+  },
+  "keywords": [
+    "iot",
+    "edge",
+    "hono",
+    "device",
+    "nodejs",
+    "workers",
+    "typescript"
+  ],
+  "author": "MikeTeddyOmondi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MikeTeddyOmondi/iot-edge/issues"
+  },
+  "homepage": "https://github.com/MikeTeddyOmondi/iot-edge#readme"
+}

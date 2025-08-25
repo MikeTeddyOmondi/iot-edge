@@ -1,0 +1,111 @@
+### IoT Edge Service API Examples
+
+### Health check
+curl -X GET http://localhost:8080/health
+
+### Register a device
+curl -X POST http://localhost:8080/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "sensor-001",
+    "name": "Temperature Sensor",
+    "type": "temperature",
+    "location": {
+      "building": "Factory A",
+      "floor": 2,
+      "room": "Server Room"
+    },
+    "metadata": {
+      "model": "TempSense Pro",
+      "firmware": "1.2.3"
+    }
+  }'
+
+### Send heartbeat
+curl -X POST http://localhost:8080/heartbeat/sensor-001
+
+### Get device status
+curl http://localhost:8080/device/sensor-001
+
+### Get all devices
+curl http://localhost:8080/devices
+
+### Update device
+curl -X PUT http://localhost:8080/device/sensor-001 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Temperature Sensor Updated",
+    "metadata": {
+      "model": "TempSense Pro",
+      "firmware": "1.3.0"
+    }
+  }'
+
+### Send device metrics
+curl -X POST http://localhost:8080/device/sensor-001/metrics \
+  -H "Content-Type: application/json" \
+  -d '{
+    "temperature": 23.5,
+    "humidity": 65.2,
+    "battery": 87,
+    "timestamp": 1704067200000
+  }'
+
+### Send command to device
+curl -X POST http://localhost:8080/device/sensor-001/command \
+  -H "Content-Type: application/json" \
+  -d '{
+    "action": "restart",
+    "parameters": {
+      "delay": 30
+    }
+  }'
+
+### Batch operations
+curl -X POST http://localhost:8080/devices/batch \
+  -H "Content-Type: application/json" \
+  -d '{
+    "action": "restart",
+    "deviceIds": ["sensor-001", "sensor-002", "sensor-003"]
+  }'
+
+### Register multiple devices
+curl -X POST http://localhost:8080/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "camera-001",
+    "name": "Security Camera",
+    "type": "camera",
+    "location": {
+      "building": "Factory A",
+      "floor": 1,
+      "area": "Main Entrance"
+    },
+    "metadata": {
+      "model": "SecureCam 4K",
+      "resolution": "3840x2160"
+    }
+  }'
+
+### Register another device
+curl -X POST http://localhost:8080/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "actuator-001",
+    "name": "HVAC Controller",
+    "type": "actuator",
+    "location": {
+      "building": "Factory A",
+      "floor": 2,
+      "zone": "North Wing"
+    },
+    "metadata": {
+      "model": "ClimateControl Pro",
+      "capabilities": ["temperature", "humidity", "airflow"]
+    }
+  }'
+
+### Delete device
+curl -X DELETE http://localhost:8080/device/sensor-001 
+
+###
